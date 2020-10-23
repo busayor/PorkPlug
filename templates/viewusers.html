@@ -1,0 +1,6 @@
+{% extends "base.html"%}
+{% block content %}
+    {% for item in values %}
+        <p>S/N: {{item._id}}, Email: {{item.email}}</p>
+    {% endfor %}
+{% endblock %}
