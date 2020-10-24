@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title%}PorkPlug::.{% endblock %}
+{% block content%}
+    <div class="container-fluid">
+        <p class="welcome"> <span style="color: white;">Welcome, {{email}}</span> </p>
+         <!-- with to endwith contains flashed messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                <p class="flash">{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div><h1>Add a new recipe</h1></div>
+        <hr/>
+        <form action="#" method="POST">
+        <div class="form-group">
+            <!-- <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-flask"></i></span>
+            </div> -->
+            <label for="exampleInputEmail1">Meal Category</label>
+            <select id="category" name="meal_category" class="custom-select">
+                <option value="" disabled selected>Select Meal Category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Snacks">Snacks</option>
+              </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Recipe name</label>
+          <input type="text" name="recipe_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Recipe ingredients</label>
+            <!-- <input type="text" name="recipe_ingredients" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
+            <textarea class="form-control" name="recipe_ingredients" id="exampleFormControlTextarea1" rows="1"></textarea>
+            <small id="emailHelp" class="form-text text-muted">Each ingredient must be entered on a new line.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Recipe method</label>
+            <!-- <input type="text" name="recipe_ingredients" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
+            <textarea class="form-control" name="recipe_method" id="exampleFormControlTextarea1" rows="1"></textarea>
+            <small id="emailHelp" class="form-text text-muted">Add each step in the recipe on a new line.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Add an image</label>
+            <input type="text" name="recipe_image" class="form-control" id="exampleInputEmail1" aria-describedby="imageHelp">
+            <small id="imageHelp" class="form-text text-muted">To add an image to your recipe, paste an image URL here. You must include 'https://'</small>
+          </div>
+        <input type="submit" class="btn btn-primary" value="Submit Recipe">
+      </form>
+    </div>
+{% endblock %}

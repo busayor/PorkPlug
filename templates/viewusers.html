@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block content %}
     {% for item in values %}
-        <p>S/N: {{item._id}}, Email: {{item.email}}</p>
+        <p>S/N: {{item._id}}, Email: {{item.email}}, Pwd: {{item.password}}</p>
     {% endfor %}
 {% endblock %}
