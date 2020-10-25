@@ -1,0 +1,12 @@
+{% extends "base.html"%}
+{% block content %}
+    {% for item in values %}
+        <p>S/N: {{item._id}},<br>
+            Recipe name: {{item.recipe_name}},<br>
+            Recipe ingredients: {{item.recipe_ingredients}},<br>
+            Recipe method: {{item.recipe_method}},<br>
+            Recipe Image: <img class="d-block w-100" src="{{item.recipe_image}}" alt="{{item.recipe_image}}">,<br>
+            Recipe added by: {{item.added_by}}
+        </p><hr/>
+    {% endfor %}
+{% endblock %}

@@ -4,9 +4,9 @@
   <div id="carouselExampleSlidesOnly" class="carousel slide mt-3" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="d-block w-100" src="{{url_for('static', filename='images/instantrib.jpg')}}" alt="First slide">
+        <img class="d-block w-100" src="{{url_for('static', filename='images/instantporrk.jpg')}}" alt="First slide">
           <div class="carousel-caption">
-            <h1>Instant Port</h1>
+            <h1 style="color: white;">Instant Port</h1>
             <p>We had such a great time in LA!</p>
           </div>
       </div>
@@ -20,6 +20,7 @@
             <p class="card-text">{{item.recipe_ingredients}}</p>
             <p class="card-text">{{item.recipe_method}}</p>
             <p class="card-text"><small class="text-muted">{{item.added_by}}</small></p>
+            <a class="btn btn-primary" href="{{url_for('added_recipes', value = item._id)}}">View Recipe</a>
           </div>
         </div>
       </div>

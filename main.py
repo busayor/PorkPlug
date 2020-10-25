@@ -114,7 +114,11 @@ def view():
 # page to render all the records of the recipesDB table
 @app.route("/added_recipes")
 def added_recipes():
-    return render_template("added_recipes.html", values = recipes_db.query.all())
+    value = request.args.get('value', None)
+    view_recipe = recipes_db.query.filter_by(_id = value).first()
+    name = view_recipe.recipe_name
+    flash(view_recipe)
+    return render_template("added_recipes.html", name = name)
 
 
 @app.route("/addrecipe", methods = ["GET", "POST"])
