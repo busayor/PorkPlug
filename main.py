@@ -5,6 +5,7 @@ from flask_material import Material
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 from json import JSONEncoder
+import os
 
 app = Flask(__name__)
 Material(app)
