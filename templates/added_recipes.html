@@ -1,15 +1,8 @@
 {% extends "base.html"%}
 {% block content %}
-{% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <p class="flash">{{msg}}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <!-- {% for item in view_recipe %} -->
-        <!-- S/N: {{view_recipe._id}},<br> -->
-          <p>  Recipe name: {{get_flashed_messages(name)}},<br>
+
+        <p>
+            Recipe name: {{receipe.recipe_name}}<br>
+            Recipe ingredients: {{receipe.recipe_ingredients}}
         </p><hr/>
-    <!-- {% endfor %} -->
 {% endblock %}

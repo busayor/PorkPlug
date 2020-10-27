@@ -1,9 +1,10 @@
-from flask import Flask, render_template, url_for, request, session, flash, redirect
+from flask import Flask, render_template, url_for, request, session, flash, redirect, jsonify
 from admin.admin import my_admin_blueprint
 from recipes.recipes import my_recipe_blueprint
 from flask_material import Material
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
+from json import JSONEncoder
 
 app = Flask(__name__)
 Material(app)
@@ -115,10 +116,10 @@ def view():
 @app.route("/added_recipes")
 def added_recipes():
     value = request.args.get('value', None)
-    view_recipe = recipes_db.query.filter_by(_id = value).first()
-    name = view_recipe.recipe_name
-    flash(view_recipe)
-    return render_template("added_recipes.html", name = name)
+    view_recipe = recipes_db.query.get(value)
+    # name = view_recipe.recipe_name
+    # flash(view_recipe)
+    return render_template("added_recipes.html", receipe = view_recipe)
 
 
 @app.route("/addrecipe", methods = ["GET", "POST"])
