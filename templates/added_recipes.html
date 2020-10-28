@@ -1,8 +1,34 @@
 {% extends "base.html"%}
 {% block content %}
+        <h1 style="text-align: center;">"{{receipe.recipe_name}}"</h1>
+        <div class="row pb-3">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Ingredients</h5>
+                  <p class="card-text">{{receipe.recipe_ingredients}}</p>
 
-        <p>
-            Recipe name: {{receipe.recipe_name}}<br>
-            Recipe ingredients: {{receipe.recipe_ingredients}}
-        </p><hr/>
+                  <h5 class="card-title">Method</h5>
+                  <p class="card-text">{{receipe.recipe_method}}</p>
+
+                  <h5 class="card-title">Recipe posted by:</h5>
+                  <p class="card-text">{{receipe.added_by}}</p>
+
+                  <h5 class="card-title">Share this recipe</h5>
+                  <p class="card-text"><!-- Add font awesome icons -->
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-google"></a>
+                    <a href="#" class="fa fa-instagram"></a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">          
+                    <img class="card-img-top" src="{{receipe.recipe_image}}" alt="{{receipe.recipe_image}}">
+                </div>
+              </div>
+            </div>
+          </div>
 {% endblock %}
