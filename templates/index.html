@@ -13,14 +13,14 @@
     </div>
   <div class="row mt-3 pb-3">
     {% for item in values %}
-      <div class="col-md-4 col-sm-6">
+      <div class="col-md-4 col-sm-6 pt-3">
         <div class="card">
           <img class="card-img-top" src="{{item.recipe_image}}" alt="{{item.recipe_image}}">
           <div class="card-body">
-            <p class="card-text">{{item.recipe_ingredients}}</p>
-            <p class="card-text">{{item.recipe_method}}</p>
-            <p class="card-text"><small class="text-muted">{{item.added_by}}</small></p>
-            <a class="btn btn-primary" href="{{url_for('added_recipes', value = item._id)}}">View Recipe</a>
+            <p class="card-text"><span style="color: #000; font-size: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">{{item.recipe_name}}</span> </p>
+            <p class="card-text"><span style="color: #377ba8;">Likes:</span> {{item.likes}}</p>
+            <p class="card-text"><small class="text-muted">Posted by: {{item.added_by}}</small></p>
+            <a class="btn btn-primary" href="{{url_for('viewrecipe', value = item._id)}}">View Recipe</a>
           </div>
         </div>
       </div>

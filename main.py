@@ -30,7 +30,7 @@ class my_users(db.Model):
         self.password = password
 
 
-class recipes_db(db.Model):
+class my_recipes_db(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True)
     meal_category = db.Column(db.String(20))
     recipe_name = db.Column(db.String(100))
@@ -38,20 +38,22 @@ class recipes_db(db.Model):
     recipe_method = db.Column(db.String(100))
     recipe_image = db.Column(db.String(100))
     added_by = db.Column(db.String(100))
+    likes = db.Column(db.Integer)
 
-    def __init__(self, meal_category, recipe_name, recipe_ingredients, recipe_method, recipe_image, added_by):
+    def __init__(self, meal_category, recipe_name, recipe_ingredients, recipe_method, recipe_image, added_by, likes):
         self.meal_category = meal_category
         self.recipe_name = recipe_name
         self.recipe_ingredients = recipe_ingredients
         self.recipe_method = recipe_method
         self.recipe_image = recipe_image
         self.added_by = added_by
+        self.likes = likes
 
 
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template("index.html", values = recipes_db.query.all())
+    return render_template("index.html", values = my_recipes_db.query.all())
     # return "<h1>Default landing page</h1>"
 
 
@@ -116,11 +118,27 @@ def view():
 # page to render all the records of the recipesDB table
 @app.route("/added_recipes")
 def added_recipes():
+    return render_template("added_recipes.html", values = my_recipes_db.query.all())
+
+
+# page to render all the records of the recipesDB table
+@app.route("/viewrecipe", methods = ["GET", "POST"])
+def viewrecipe():
     value = request.args.get('value', None)
-    view_recipe = recipes_db.query.get(value)
+    view_recipe = my_recipes_db.query.get(value)
     # name = view_recipe.recipe_name
     # flash(view_recipe)
-    return render_template("added_recipes.html", receipe = view_recipe)
+
+    # here, we are about to receive the email from the use but first you must check the method type
+    if request.method == "POST":
+        likes = request.form["likes"]
+        view_recipe.likes = view_recipe.likes + 1
+        db.session.commit()
+        flash("Record successfully saved!")
+    else:
+        likes = view_recipe.likes
+
+    return render_template("viewrecipe.html", receipe = view_recipe)
 
 
 @app.route("/addrecipe", methods = ["GET", "POST"])
@@ -132,13 +150,15 @@ def addrecipe():
             recipe_method = request.form["recipe_method"]
             recipe_image = request.form["recipe_image"]
             added_by = session["email"]
+            likes = 0
 
-            newRecipe = recipes_db(meal_category = meal_category,
+            newRecipe = my_recipes_db(meal_category = meal_category,
             recipe_name = recipe_name,
             recipe_ingredients = recipe_ingredients,
             recipe_method = recipe_method,
             recipe_image = recipe_image,
-            added_by = added_by
+            added_by = added_by,
+            likes = likes
             )
             db.session.add(newRecipe)   
             db.session.commit()
@@ -146,6 +166,7 @@ def addrecipe():
             # return redirect(url_for("recipes", values = recipes_db.query.all()))
     
     return render_template("addrecipe.html", email = session["email"])
+    
 
 
 if __name__ == "__main__":
