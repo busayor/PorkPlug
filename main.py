@@ -116,8 +116,16 @@ def view():
 
 
 # page to render all the records of the recipesDB table
-@app.route("/added_recipes")
+@app.route("/added_recipes", methods = ["GET", "POST"])
 def added_recipes():
+    if request.method == "POST":
+        search = request.form["search"]
+        recipe_search = "%{}%".format(search)
+        found_recipe = my_recipes_db.query.filter(my_recipes_db.recipe_name.like(recipe_search)).all()
+        search_count = my_recipes_db.query.filter(my_recipes_db.recipe_name.like(recipe_search)).count()
+        # print(search_count)
+        return render_template("search.html", values = found_recipe, search_count = search_count)
+
     return render_template("added_recipes.html", values = my_recipes_db.query.all())
 
 
@@ -172,6 +180,6 @@ def addrecipe():
 if __name__ == "__main__":
     db.create_all()
     # to push to heroku uncomment the next two lines as it uses port 33507
-    port = int(os.environ.get("PORT", 33507))
-    app.run(host='0.0.0.0', port=port)
-    # app.run(debug=True)
+    # port = int(os.environ.get("PORT", 33507))
+    # app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)

@@ -1,15 +1,16 @@
 {% extends "base.html"%}
 {% block content %}
 <div>
-  <br>
-  <form action="#" class="form-inline my-2 my-lg-0" method = "POST">
-    <label for="exampleInputPassword1">Search for a recipe: </label>
-    <input class="form-control mr-sm-2" type="search" name="search" placeholder="E.g: 'Beef' or 'Chicken Wings'">
-    <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-    <input type="submit" name="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0">
-  </form>
-</div>
-<hr>
+    <br>
+    <h3 style="font-size: 20px;">Search Results - {{search_count}} results</h3>
+    <form action="#" class="form-inline my-2 my-lg-0" method = "POST">
+      <label for="exampleInputPassword1">Start a new search: </label>
+      <input class="form-control mr-sm-2" type="search" name="search" placeholder="E.g: 'Beef' or 'Chicken Wings'">
+      <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+      <input type="submit" name="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0">
+    </form>
+  </div>
+  <hr>
 {% for item in values %}
     <div class="card mb-3">
       <div class="row no-gutters">
