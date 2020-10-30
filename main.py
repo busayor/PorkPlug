@@ -180,6 +180,6 @@ def addrecipe():
 if __name__ == "__main__":
     db.create_all()
     # to push to heroku uncomment the next two lines as it uses port 33507
-    # port = int(os.environ.get("PORT", 33507))
-    # app.run(host='0.0.0.0', port=port)
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 33507))
+    app.run(host='0.0.0.0', port=port)
+    # app.run(debug=True)
