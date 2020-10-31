@@ -124,7 +124,12 @@ def added_recipes():
         found_recipe = my_recipes_db.query.filter(my_recipes_db.recipe_name.like(recipe_search)).all()
         search_count = my_recipes_db.query.filter(my_recipes_db.recipe_name.like(recipe_search)).count()
         # print(search_count)
-        return render_template("search.html", values = found_recipe, search_count = search_count)
+        if search_count > 0:
+            return render_template("search.html", values = found_recipe, search_count = search_count)
+        else:
+            flash("No records found", search)
+            return render_template("added_recipes.html", values = my_recipes_db.query.all())
+            # return render_template("search.html", values = found_recipe, search_count = search_count, )
 
     return render_template("added_recipes.html", values = my_recipes_db.query.all())
 

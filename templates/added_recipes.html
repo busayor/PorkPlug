@@ -2,6 +2,13 @@
 {% block content %}
 <div>
   <br>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for msg in messages %}
+          <p class="flash">{{msg}}</p>
+      {% endfor %}
+  {% endif %}
+  {% endwith %}
   <form action="#" class="form-inline my-2 my-lg-0" method = "POST">
     <label for="exampleInputPassword1">Search for a recipe: </label>
     <input class="form-control mr-sm-2" type="search" name="search" placeholder="E.g: 'Beef' or 'Chicken Wings'">
